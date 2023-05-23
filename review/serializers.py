@@ -32,10 +32,10 @@ class FavoriteSerializer(ModelSerializer):
         return attrs
     
     def to_representation(self, instance):
-        from post.serializers import PostSerializer
+        from main.serializers import CountrySerializer
 
         rep = super().to_representation(instance)
-        rep['post'] = PostSerializer(instance.post).data
+        rep['main'] = CountrySerializer(instance.main).data
         return rep
         
 

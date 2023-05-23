@@ -1,6 +1,6 @@
 from django.db import models
 from account.models import User
-from post.models import Post
+from main.models import Country
 
 
 class Comment(models.Model):
@@ -9,8 +9,8 @@ class Comment(models.Model):
         on_delete=models.CASCADE, 
         related_name='comments'
         )
-    post = models.ForeignKey(
-        Post,
+    country = models.ForeignKey(
+        Country,
         on_delete=models.CASCADE,
         related_name='comments'
     )
@@ -25,8 +25,8 @@ class Rating(models.Model):
         on_delete=models.CASCADE,
         related_name='ratings'
     )
-    post = models.ForeignKey(
-        Post,
+    country = models.ForeignKey(
+        Country,
         on_delete=models.CASCADE,
         related_name='ratings'
     )
@@ -42,12 +42,12 @@ class Favorite(models.Model):
         on_delete=models.CASCADE, 
         related_name='favorites'
         )
-    post = models.ForeignKey(
-        Post,
+    country = models.ForeignKey(
+        Country,
         on_delete=models.CASCADE,
         related_name='favorites'
     )
 
 class Like(models.Model):
     user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, related_name='likes', on_delete=models.CASCADE)
