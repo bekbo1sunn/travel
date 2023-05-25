@@ -5,8 +5,8 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 
-from .models import Country
-from .serializers import CountrySerializer
+from .models import Country, Category
+from .serializers import CountrySerializer, CategorySerializer
 
 
 class CountryViewSet(mixins.CreateModelMixin,
@@ -24,6 +24,15 @@ class CountryViewSet(mixins.CreateModelMixin,
 
     
 
-
+class CategoryViewSet(mixins.CreateModelMixin,
+                      mixins.ListModelMixin,
+                      mixins.DestroyModelMixin,
+                      GenericViewSet):
+    
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    
+    
 
     
