@@ -54,3 +54,32 @@ class User(AbstractUser):
 
     def create_activation_code(self):
         self.activation_code = get_random_string(8, 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890')
+
+    
+
+class Billing(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='billing'
+    )
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def top_up(self, amount):
+        """Пополнение счета, если транзакция прошла успешно, вернется True"""
+        if amount > 0:
+            self.amount += amount
+            self.save()
+            return True
+        return False
+
+    def withdraw(self, amount):
+        """Снятие денег со счета, если транзакция прошла успешно, вернется True"""
+        if self.amount >= amount:
+            self.amount -= amount
+            self.save()
+            return True
+        return False
+
+    def __str__(self):
+        return self.user.username

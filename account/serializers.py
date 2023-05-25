@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .helpers import send_spam
 
-from .models import User
+from .models import User, Billing
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     password_confirm = serializers.CharField(min_length=1, required=True)
@@ -26,3 +26,19 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         send_spam(User)
         return User.objects.create_user(**validated_data)
     
+
+class BillingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Billing
+        fields = ("amount",)
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id", "username", "phone", "bio")
+
+    def to_representation(self, instance: User):
+        rep = super().to_representation(instance)
+        rep["billing"] = instance.billing.amount
+        return rep
