@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'account',
     'main',
     'review',
+    'chat',
+    'channels',
+    'crispy_forms',
+    'bootstrap4',
     'order',
 ]
 
