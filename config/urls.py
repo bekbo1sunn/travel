@@ -39,5 +39,5 @@ urlpatterns = [
     path('api/v1/', include("main.urls")),
     path('api/v1/', include("review.urls")),
     path('', include('chat.urls')),
+    path('api/v1/', include("order.urls")),
 ]
-    

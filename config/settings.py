@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'channels',
     'crispy_forms',
     'bootstrap4',
+    'order',
 ]
 
 MIDDLEWARE = [
