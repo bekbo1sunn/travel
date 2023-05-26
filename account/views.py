@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from drf_yasg.utils import swagger_auto_schema
+from decouple import config
 
 from .serializers import RegisterUserSerializer, BillingSerializer, ProfileSerializer
 from .models import User
@@ -25,7 +26,8 @@ class ActivateView(APIView):
         user.is_active = True
         user.activation_code = ''
         user.save()
-        return redirect("https://google.com")
+        LINK = config("LINK")
+        return redirect(LINK)
 
 
 class TopUpBillingView(APIView):

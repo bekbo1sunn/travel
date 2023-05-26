@@ -13,7 +13,7 @@ class Country(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='images/', blank=True)
     video = models.FileField(upload_to='videos/', blank=True)
-    text = models.TextField()
+    description = models.TextField()
 
     @property
     def average_rating(self):
