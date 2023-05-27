@@ -14,4 +14,5 @@ urlpatterns = [
     path('activate/<str:activation_code>/', ActivateView.as_view()),
     path('billing/top-up/', TopUpBillingView.as_view()),
     path('', include(router.urls)),
+    
 ]
