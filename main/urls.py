@@ -1,12 +1,14 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CountryViewSet, CategoryViewSet, TiketViewSet, CategoryListCreateAPIView, CountryListCreateAPIView, TiketListCreateAPIView
+from .views import CountryViewSet, CategoryViewSet, TiketViewSet, CategoryListCreateAPIView, CountryListCreateAPIView, TiketListCreateAPIView, CategoryTiketsViewSet
 
 
 router = DefaultRouter()
 router.register("countrys", CountryViewSet)
 router.register("category", CategoryViewSet)
 router.register("tikets", TiketViewSet)
+router.register("category_tikets", CategoryTiketsViewSet)
+
 
 
 urlpatterns = [

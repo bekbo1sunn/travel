@@ -7,8 +7,8 @@ from rest_framework.parsers import MultiPartParser
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 
-from .models import Country, Category, Tiket
-from .serializers import CountrySerializer, CategorySerializer, TiketSerializer
+from .models import Country, Category, Tiket, CategoryTikets
+from .serializers import CountrySerializer, CategorySerializer, TiketSerializer, CategoryTiketsSerializer
 
 
 class CountryViewSet(mixins.CreateModelMixin,
@@ -65,3 +65,14 @@ class TiketListCreateAPIView(ListAPIView):
     queryset = Tiket.objects.all()
     serializer_class = TiketSerializer
     
+
+
+class CategoryTiketsViewSet(mixins.CreateModelMixin,
+                      mixins.ListModelMixin,
+                      mixins.UpdateModelMixin,
+                      mixins.DestroyModelMixin,
+                      GenericViewSet):
+    
+    queryset = CategoryTikets.objects.all()
+    serializer_class = CategoryTiketsSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]

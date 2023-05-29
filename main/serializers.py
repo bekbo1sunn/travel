@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import Country, Category, Tiket
+from .models import Country, Category, Tiket, CategoryTikets
 from review.serializers import CommentSerializer
 
 
@@ -26,3 +26,10 @@ class TiketSerializer(ModelSerializer):
     class Meta:
         model = Tiket
         fields = '__all__'
+
+
+class CategoryTiketsSerializer(ModelSerializer):
+    class Meta:
+        model = CategoryTikets
+        fields = '__all__'
+

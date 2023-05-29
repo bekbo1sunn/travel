@@ -4,11 +4,14 @@ from main.models import Country, Tiket
 
 
 class Order(models.Model):
-	user = models.ForeignKey(
-		User,
-		on_delete=models.CASCADE,
-		related_name='orders'
-	)
+	name = models.CharField(max_length=20)
+	surname = models.TextField()
+	mail = models.EmailField()
+	phone = models.CharField(max_length=50)
+	card_number = models.CharField(max_length=16)
+	cardholder_name = models.TextField()
+	validity = models.DateField()
+	cvv = models.CharField(max_length=3)
 	is_paid = models.BooleanField(default=False)
 	created_at = models.DateTimeField(auto_now_add=True)
 

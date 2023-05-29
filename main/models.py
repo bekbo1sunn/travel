@@ -24,17 +24,38 @@ class Country(models.Model):
 
     def __str__(self):
         return self.title
-    
 
+
+class CategoryTikets(models.Model):
+    name = models.TextField()
+    baggage = models.TextField()
+    hand_luggage = models.TextField()
+    nutrtion = models.BooleanField()
+    exchange_return = models.BooleanField()
+    preferred_seat_selection = models.BooleanField()
+    business_lounge = models.BooleanField()
+    separate_landing = models.BooleanField()
+    separate_reception_desk = models.BooleanField()
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Tiket(models.Model):
-    title = models.CharField(max_length=40)
-    departure_place = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='departure')
-    arrival_place = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='arrival')
+    flight_name = models.CharField(max_length=40)
+    category = models.ForeignKey(CategoryTikets, on_delete=models.CASCADE, related_name='category_tikets')
+    departure = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='departure')
+    arrival = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='arrival')
+    departure_date = models.DateField()
+    arrival_date = models.DateField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.TextField()
+    flight_time = models.TextField()
     quantity = models.IntegerField()
 
     def __str__(self) -> str:
-        return self.title
+        return self.flight_name
+
+
+
+
+    
