@@ -61,7 +61,7 @@ class TiketViewSet(mixins.CreateModelMixin,
     search_fields = ('title', 'description')
     
 
-class TiketListCreateAPIView(ListAPIView):
+class TiketListAPIView(ListAPIView):
     queryset = Tiket.objects.all()
     serializer_class = TiketSerializer
     
