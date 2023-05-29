@@ -44,7 +44,6 @@ class CategoryTikets(models.Model):
 class Tiket(models.Model):
     flight_name = models.CharField(max_length=40)
     category = models.ForeignKey(CategoryTikets, on_delete=models.CASCADE, related_name='category_tikets')
-    departure = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='departure')
     arrival = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='arrival')
     departure_date = models.DateField()
     arrival_date = models.DateField()
