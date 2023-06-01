@@ -41,7 +41,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=20, unique=True)
     email = models.EmailField(unique=True)  # когда регитр-ся чтобы выходило "Польз-ль с таким имененем уже сущ-ет
     phone = models.CharField(max_length=50)
-    bio = models.TextField(blank=True, null=True)
+    bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     is_active = models.BooleanField(default=False)
     activation_code = models.CharField(max_length=8, null=True)
