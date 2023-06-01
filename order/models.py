@@ -8,6 +8,7 @@ class Order(models.Model):
 	surname = models.TextField()
 	mail = models.EmailField()
 	phone = models.CharField(max_length=50)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders', blank=True, null=True)
 	card_number = models.CharField(max_length=16)
 	cardholder_name = models.TextField()
 	validity = models.DateField()
@@ -19,7 +20,7 @@ class Order(models.Model):
 	def total_price(self):
 		items = self.items.all()
 		if items.exists():
-			return sum([item.tiket.price * item.quantity for item in items])
+			return sum([item.items.price * item.quantity for item in items])
 		return 0
         
 

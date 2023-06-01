@@ -5,9 +5,10 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework_simplejwt.tokens import RefreshToken
 from decouple import config
 
-from .serializers import RegisterUserSerializer, BillingSerializer, ProfileSerializer
+from .serializers import RegisterUserSerializer, BillingSerializer, ProfileSerializer, LogoutSerializer
 from .models import User
 
 
@@ -52,3 +53,22 @@ class TopUpBillingView(APIView):
 class ProfileViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = ProfileSerializer
+
+
+
+class LogoutAPIView(APIView):
+    '''
+    Only authorized users can make a logout
+    '''
+    permission_classes = (IsAuthenticated,)
+    serializer_class = [LogoutSerializer,]
+    @swagger_auto_schema(request_body=LogoutSerializer)
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response(status=204)
+        except Exception as e:
+            return Response(status=400)

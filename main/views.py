@@ -57,8 +57,8 @@ class TiketViewSet(mixins.CreateModelMixin,
     serializer_class = CountrySerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
     filter_backends = (SearchFilter, DjangoFilterBackend)
-    filterset_fields = ('title',)
-    search_fields = ('title', 'description')
+    filterset_fields = ('flight_name', 'category')
+    search_fields = ('category','arrival')
     
 
 class TiketListAPIView(ListAPIView):

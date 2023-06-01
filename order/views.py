@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Order
 from .serializers import OrderSerializer
-from .tasks import send_successful_payment_message, send_error_payment_message
+
 
 
 class OrderViewSet(ModelViewSet):
@@ -24,17 +24,4 @@ class OrderViewSet(ModelViewSet):
 		if order.user.billing.withdraw(order.total_price):
 			order.is_paid = True
 			order.save()
-			send_successful_payment_message.delay(
-				email=order.user.email,
-				total_price = order.total_price,
-				items = [
-					{"title": i.product.title, "quantity": i.quantity}
-					for i in order.items.all()
-				]
-			)
-			return Response(status=200)
-		send_error_payment_message(
-			email=order.user.email,
-			order=order
-		)
 		return Response("Not enough money", status=400)

@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from .helpers import send_spam
 
 from .models import User, Billing
 
@@ -22,10 +21,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("User with this email already exists")
         return email
     
-    def create(self, validated_data):
-        send_spam(User)
-        return User.objects.create_user(**validated_data)
-    
 
 class BillingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,3 +37,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         rep = super().to_representation(instance)
         rep["billing"] = instance.billing.amount
         return rep
+    
+
+class LogoutSerializer(serializers.Serializer):
+    refresh_token = serializers.CharField()

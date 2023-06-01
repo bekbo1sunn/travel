@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.routers import DefaultRouter
 
-from .views import RegisterUserView, ActivateView, TopUpBillingView, ProfileViewSet
+from .views import RegisterUserView, ActivateView, TopUpBillingView, ProfileViewSet, LogoutAPIView
 
 
 router = DefaultRouter()
@@ -14,5 +14,6 @@ urlpatterns = [
     path('activate/<str:activation_code>/', ActivateView.as_view()),
     path('billing/top-up/', TopUpBillingView.as_view()),
     path('', include(router.urls)),
+    path('logout/', LogoutAPIView.as_view()),
     
 ]
